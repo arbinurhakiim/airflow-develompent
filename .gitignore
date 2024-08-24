@@ -1,0 +1,8 @@
+/.env
+/Dockerfile
+/airflow.cfg
+/config
+/docker-compose.yaml
+/logs
+/plugins
+/requirements.txt
