@@ -235,20 +235,3 @@ def copy_csv_to_postgres(city: str, weather_directory: str, host: str, user: str
     print(f"Data copied successfully.")
     cur.close()
     conn.close()
-
-# if __name__ == "__main__": 
-#     city = 'jakarta'
-#     host = "154.26.137.211"
-#     user = "airflow"
-#     password = "airflow"
-#     port = 5432
-#     dbname = "airflow_sandbox"
-#     schema = f"{city}_weather"
-#     endpoint = 'data/2.5/weather?'
-#     api_key = "66b9690288058c25143d39fcd8f083a1"
-#     table_name = f"{city}_weather"
-    
-#     print(directory(f'/plugins/{city}_weather_data'))
-    # print(extract_data(endpoint, api_key, city))
-
-#     create_table(city, host, user, password, port, dbname, schema)
