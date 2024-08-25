@@ -82,5 +82,5 @@ with DAG(
         task_id='end_task'
     )
 
-# Define dependencies
-start_task >> [extracting_data, creating_table] >> truncating_table >> generating_csv >> file_list >> storing_data >> end_task
+    # Define dependencies
+    start_task >> [extracting_data, creating_table] >> truncating_table >> generating_csv >> file_list >> storing_data >> end_task
