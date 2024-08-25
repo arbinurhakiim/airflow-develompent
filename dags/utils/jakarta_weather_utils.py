@@ -8,18 +8,19 @@ from psycopg2 import sql
 from datetime import datetime, timedelta
 import pytz
 
+
 def extract_data(endpoint: str, api_key: str, city: str) -> dict:
 
     """
-    This function used for extracts weather data for a specified city and returns specified values from the OpenWeatherMap API.
-    
+    This function is used for extracting weather data for the specified city from OpenWeatherMap API.
+
     Parameters:
-        endpoint: str -> The API endpoint for weather data, e.g., 'data/2.5/weather?'
-        api_key: str -> The API key for accessing the OpenWeatherMap API
-        city: str -> The name of the city for which weather data is requested
+        endpoint (str): The API endpoint for weather data, e.g., 'data/2.5/weather?'
+        api_key (str): The API key for accessing the OpenWeatherMap API
+        city (str): The city for which weather data is extracted
 
     Returns:
-        dict: A dictionary containing weather data for the specified city
+        dict: dictionary containing weather data for the specified city
     """
 
     # API url
@@ -89,15 +90,15 @@ def extract_data(endpoint: str, api_key: str, city: str) -> dict:
 def create_table(city: str, host: str, user: str, password: str, port: int, dbname:str) -> None:
 
     """
-    This function used for creating weather table (if not exists) for a specified city
-    
+    This function is used for creating a table for a specified city in the database
+
     Parameters:
-        city (str): The name of the city associated with the table to be truncated
+        city (str): The name of the city associated with the table to be created
         host (str): The hostname or IP address of the database server
         user (str): The username for accessing the database
         password (str): The password for accessing the database
         port (int): The port number on which the database server is listening
-        dbname (str): The name of the database containing the table to be truncated
+        dbname (str): The name of the database containing the table to be created
 
     Returns:
         None
@@ -119,7 +120,7 @@ def create_table(city: str, host: str, user: str, password: str, port: int, dbna
 def truncate_table(city: str, host: str, user: str, password: str, port: int, dbname:str) -> None:
 
     """
-    This function used for truncating weather table for a specified city
+    This function is used for truncating a table for a specified city in the database
 
     Parameters:
         city (str): The name of the city associated with the table to be truncated
@@ -149,12 +150,12 @@ def truncate_table(city: str, host: str, user: str, password: str, port: int, db
 def generate_csv(endpoint: str, api_key: str, city: str) -> None:
     
     """
-    This function generates a CSV file from weather data obtained from the OpenWeatherMap API for a specified city.
+    This function is used for generating a CSV file for a specified city from OpenWeatherMap API.
 
     Parameters:
         endpoint (str): The API endpoint for weather data, e.g., 'data/2.5/weather?'
         api_key (str): The API key for accessing the OpenWeatherMap API
-        city (str): The name of the city for which weather data is requested
+        city (str): The name of the city associated with the generated CSV file
 
     Returns:
         None
@@ -186,13 +187,13 @@ def generate_csv(endpoint: str, api_key: str, city: str) -> None:
 def fetch_file_list(weather_directory) -> list:
 
     """
-    Returns a list of filenames in the specified weather directory
-    
+    This function is used for fetching a list of files from the specified directory.
+
     Parameters:
-        weather_directory (str): The directory path relative to the current working directory
-        
+        weather_directory (str): The directory containing the files to be listed
+
     Returns:
-        list: A list of filenames in the specified weather directory
+        list: A list of files in the specified directory
     """
 
     # Get the current working directory and list the files
@@ -203,20 +204,22 @@ def fetch_file_list(weather_directory) -> list:
     return file_list
 
 def copy_csv_to_postgres(city: str, weather_directory: str, host: str, user: str, password: str, port: int, dbname: str, table_name: str) -> None:
-    
+
     """
-    This function used for inject csv data from the certain directory into postgres database
+    This function is used for copying data from CSV files in the specified directory to the specified postgres table.
 
     Parameters:
+        city (str): The name of the city associated with the table to be copied
+        weather_directory (str): The directory containing the CSV files to be copied
         host (str): The hostname or IP address of the database server
         user (str): The username for accessing the database
         password (str): The password for accessing the database
         port (int): The port number on which the database server is listening
-        dbname (str): The name of the database containing the table to be truncated
-        table_name (str): The name of postgres database table containing weather data
+        dbname (str): The name of the database containing the table to be copied
+        table_name (str): The name of the table to be copied
 
     Returns:
-        None   
+        None
     """
 
     # Extract file list

@@ -40,7 +40,22 @@ def extract_data(location: dict, endpoint: str, api_key: str) -> dict:
 
 def dump_raw_data(location: dict, endpoint: str, api_key: str, ACCESS_KEY_ID: str, SECRET_ACCESS_KEY: str, s3_bucket: str) -> None:
 
-    # Extract data and convert to JSON string
+    """
+    This function is used for dumping the raw weather data in JSON format to S3 bucket.
+
+    Parameters:
+        location (dict): The dictionary containing the list of cities for which weather data is extracted
+        endpoint (str): The API endpoint for weather data, e.g., 'data/2.5/weather?'
+        api_key (str): The API key for accessing the OpenWeatherMap API
+        ACCESS_KEY_ID (str): The AWS Access Key ID
+        SECRET_ACCESS_KEY (str): The AWS Secret Access Key
+        s3_bucket (str): The S3 bucket name where the raw data will be dumped
+
+    Returns:
+        None
+    """
+
+    # Extract JSON data
     infile = extract_data(location, endpoint, api_key)
 
     time_zone = pytz.timezone("Asia/Jakarta")
