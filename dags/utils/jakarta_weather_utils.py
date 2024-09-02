@@ -238,3 +238,4 @@ def copy_csv_to_postgres(city: str, weather_directory: str, host: str, user: str
     print(f"Data copied successfully.")
     cur.close()
     conn.close()
+    
