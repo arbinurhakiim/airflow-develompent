@@ -75,7 +75,7 @@ def normalize_and_transform_json_to_parquet(raw_bucket, clean_bucket, ACCESS_KEY
     s3 = s3fs.S3FileSystem(key=ACCESS_KEY_ID, secret=SECRET_ACCESS_KEY)
 
     # List all JSON files in the raw bucket
-    json_files_list = list_raw_files(s3, raw_bucket, ACCESS_KEY_ID, SECRET_ACCESS_KEY)
+    json_files_list = list_raw_files(raw_bucket, ACCESS_KEY_ID, SECRET_ACCESS_KEY)
 
     for iter_json_files in json_files_list:
         # Read the JSON data from the S3 file
