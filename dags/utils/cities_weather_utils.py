@@ -3,8 +3,9 @@ import json
 import pandas as pd
 import pytz
 from datetime import datetime
+import s3fs
 
-def extract_and_dump_data(s3, location: dict, endpoint: str, api_key: str, raw_bucket: str) -> None:
+def extract_and_dump_data(location: dict, endpoint: str, api_key: str, raw_bucket: str, ACCESS_KEY_ID, SECRET_ACCESS_KEY) -> None:
     """
     Extract weather data for a list of cities from the OpenWeatherMap API and dump it in JSON format into the S3 raw bucket.
     """
@@ -29,6 +30,8 @@ def extract_and_dump_data(s3, location: dict, endpoint: str, api_key: str, raw_b
     timestamp = datetime.now(time_zone)
     timestamp_str = timestamp.strftime("%Y%m%d-%H")
 
+    s3 = s3fs.S3FileSystem(key=ACCESS_KEY_ID, secret=SECRET_ACCESS_KEY)
+
     # Define the file path in the S3 bucket
     s3_path = f"{raw_bucket}/cities_weather_{timestamp_str}.json"
 
@@ -39,10 +42,13 @@ def extract_and_dump_data(s3, location: dict, endpoint: str, api_key: str, raw_b
     print(f"Successfully wrote JSON to {s3_path}")
 
 
-def list_raw_files(s3, raw_bucket):
+def list_raw_files(raw_bucket, ACCESS_KEY_ID, SECRET_ACCESS_KEY):
     """
     List all JSON files in the S3 raw bucket.
     """
+
+    s3 = s3fs.S3FileSystem(key=ACCESS_KEY_ID, secret=SECRET_ACCESS_KEY)
+
     files = s3.ls(raw_bucket)
     
     # Filter out only JSON files
@@ -61,10 +67,13 @@ def list_raw_files(s3, raw_bucket):
 
     return json_files
 
-def normalize_and_transform_json_to_parquet(s3, raw_bucket, clean_bucket):
+def normalize_and_transform_json_to_parquet(raw_bucket, clean_bucket, ACCESS_KEY_ID, SECRET_ACCESS_KEY):
     """
     Normalize and transform all raw JSON data files from the raw S3 bucket to Parquet and save them in the clean S3 bucket.
     """
+
+    s3 = s3fs.S3FileSystem(key=ACCESS_KEY_ID, secret=SECRET_ACCESS_KEY)
+
     # List all JSON files in the raw bucket
     json_files_list = list_raw_files(s3, raw_bucket)
 
