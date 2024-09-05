@@ -170,7 +170,7 @@ def generate_csv(endpoint: str, api_key: str, city: str) -> None:
     timestamp_str = timestamp.strftime("%Y%m%d-%H")
 
     # Generate CSV
-    output_dir = f"/home/arbi/airflow/plugins/{city}_weather_data"
+    output_dir = f"/opt/airflow/plugins/{city}_weather_data"
     os.makedirs(output_dir, exist_ok=True)  # Ensure the directory exists
     output_csv_path = os.path.join(output_dir, f"output_{timestamp_str}.csv")
     fields = list(data_dict.keys())
@@ -231,7 +231,7 @@ def copy_csv_to_postgres(city: str, weather_directory: str, host: str, user: str
 
     # Copy data from CSV file to postgres table
     for iter_file_list in file_list:
-        cur.execute(f"COPY {table_name} FROM '/home/arbi/airflow/plugins/{city}_weather_data/{iter_file_list}' DELIMITER ',' CSV HEADER")
+        cur.execute(f"COPY {table_name} FROM '/opt/airflow/plugins/{city}_weather_data/{iter_file_list}' DELIMITER ',' CSV HEADER")
         conn.commit()
     
     # Print the success message and close cursor and connection
