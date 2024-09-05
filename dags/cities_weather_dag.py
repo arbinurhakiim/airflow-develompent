@@ -99,7 +99,7 @@ with DAG(
     normalizes_and_transforms_json_to_parquet = PythonOperator(
         task_id='normalize_and_transform_json_to_parquet',
         python_callable=normalize_and_transform_json_to_parquet,
-        op_args=[raw_bucket, clean_bucket, ACCESS_KEY_ID, SECRET_ACCESS_KEY]
+        op_args=[location, raw_bucket, clean_bucket, ACCESS_KEY_ID, SECRET_ACCESS_KEY]
     )
 
     end_task = EmptyOperator(

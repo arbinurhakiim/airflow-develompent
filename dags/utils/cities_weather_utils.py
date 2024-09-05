@@ -67,7 +67,7 @@ def list_raw_files(raw_bucket, ACCESS_KEY_ID, SECRET_ACCESS_KEY):
 
     return json_files
 
-def normalize_and_transform_json_to_parquet(raw_bucket, clean_bucket, ACCESS_KEY_ID, SECRET_ACCESS_KEY):
+def normalize_and_transform_json_to_parquet(location, raw_bucket, clean_bucket, ACCESS_KEY_ID, SECRET_ACCESS_KEY):
     """
     Normalize and transform all raw JSON data files from the raw S3 bucket to Parquet and save them in the clean S3 bucket.
     """
