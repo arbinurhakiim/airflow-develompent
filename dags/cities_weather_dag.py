@@ -110,4 +110,4 @@ with DAG(
         task_id='end_task'
     )
 
-    start_task >> extracts_and_dumps_data >> lists_raw_files >> normalizes_and_transforms_json_to_parquet
+    start_task >> extracts_and_dumps_data >> lists_raw_files >> normalizes_and_transforms_json_to_parquet >> end_task
