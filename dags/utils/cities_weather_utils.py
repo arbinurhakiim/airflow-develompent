@@ -5,7 +5,7 @@ import pytz
 from datetime import datetime
 import s3fs
 
-def extract_and_dump_data(location: dict, endpoint: str, api_key: str, raw_bucket: str, ACCESS_KEY_ID, SECRET_ACCESS_KEY) -> None:
+def extract_and_dump_data(location: dict, endpoint: str, api_key: str, raw_bucket: str, ACCESS_KEY_ID: str, SECRET_ACCESS_KEY:str) -> None:
     """
     Extract weather data for a list of cities from the OpenWeatherMap API and dump it in JSON format into the S3 raw bucket.
     """
@@ -42,7 +42,7 @@ def extract_and_dump_data(location: dict, endpoint: str, api_key: str, raw_bucke
     print(f"Successfully wrote JSON to {s3_path}")
 
 
-def list_raw_files(raw_bucket, ACCESS_KEY_ID, SECRET_ACCESS_KEY):
+def list_raw_files(raw_bucket:str, ACCESS_KEY_ID:str, SECRET_ACCESS_KEY:str) -> list:
     """
     List all JSON files in the S3 raw bucket.
     """
@@ -67,7 +67,7 @@ def list_raw_files(raw_bucket, ACCESS_KEY_ID, SECRET_ACCESS_KEY):
 
     return json_files
 
-def normalize_and_transform_json_to_parquet(location, raw_bucket, clean_bucket, ACCESS_KEY_ID, SECRET_ACCESS_KEY):
+def normalize_and_transform_json_to_parquet(location: dict, raw_bucket:str, clean_bucket:str, ACCESS_KEY_ID:str, SECRET_ACCESS_KEY:str) -> None:
     """
     Normalize and transform all raw JSON data files from the raw S3 bucket to Parquet and save them in the clean S3 bucket.
     """
